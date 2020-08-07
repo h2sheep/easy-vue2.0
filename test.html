@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+      
+      <ul>
+        <!-- mustache -->
+        <li> {{msg}} </li>
+        
+        <!-- data['htmlStr'] -->
+      	<li v-html="htmlStr"></li>
+        
+        <!-- data['person']['name'] -->
+      	<li v-text="person.name"></li>
+      </ul>
+      
+      <!-- v-model -->
+      <p> {{person.test}} </p>
+      <input type="text" v-model="person.test" />
+      
+      <!-- click -->
+      <p>{{click}}</p>
+      <button v-on:click="btnClick1">v-on按钮</button>
+      <button @click="btnClick2">@按钮</button>
+      
+    </div>
+		
+		
+    <script src="mvvm.js"></script>
+    <script src="observer.js"></script>
+    <script src="compile.js"></script>
+		<script>
+      
+      
+    const vm = new MVVM({
+      el: '#app',
+      data: {
+        msg: 'mvvm',
+        htmlStr: '<p>v-html test</p>',
+        person: {
+          name: 'emt',
+          test: 'v-model'
+        },
+        click: ''
+      },
+      methods: {
+        btnClick1() {
+          this.click = 'v-on'
+        },
+        btnClick2() {
+          this.click = '@'
+        }
+      }
+    })
+   
+      
+      
+			
+      
+		</script>
+		
+	</body>
+</html>
