@@ -2,24 +2,23 @@
 // -------- MVVM -----------
 
 class MVVM {
-	constructor(options) {
-		this.$el = options.el
-		this.$data = options.data
-		this.$options = options
-    
-		if (this.$el) {
+  constructor(options) {
+    this.$el = options.el
+    this.$data = options.data
+    this.$options = options
+
+    if (this.$el) {
       // 监听属性
       new Observer(this.$data)
-      
+
       // 模板编译
       new Compile(this.$el, this)
-      
+
       // 数据代理
       this.proxy(this.$data)
     }
-	}
-  
-  
+}	
+	
   proxy(data) {
     for (const key in data) {
       // 为vm定义data中属性
@@ -39,4 +38,5 @@ class MVVM {
       })
     }
   }
+}
 }
