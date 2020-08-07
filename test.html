@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-		
-		<div id="app">
-      
+	
+  <head>
+    <meta charset="utf-8">
+    <title>mvvm test</title>
+  </head>
+	
+  <body>
+    <div id="app">
+	    
       <ul>
         <!-- mustache -->
         <li> {{msg}} </li>
@@ -34,35 +35,31 @@
     <script src="mvvm.js"></script>
     <script src="observer.js"></script>
     <script src="compile.js"></script>
-		<script>
-      
-      
-    const vm = new MVVM({
-      el: '#app',
-      data: {
-        msg: 'mvvm',
-        htmlStr: '<p>v-html test</p>',
-        person: {
-          name: 'emt',
-          test: 'v-model'
+	  
+    <script>  
+	    
+      const vm = new MVVM({
+        el: '#app',
+        data: {
+          msg: 'mvvm',
+          htmlStr: '<p>v-html test</p>',
+          person: {
+            name: 'emt',
+            test: 'v-model'
+          },
+          click: ''
         },
-        click: ''
-      },
-      methods: {
-        btnClick1() {
-          this.click = 'v-on'
-        },
-        btnClick2() {
-          this.click = '@'
+        methods: {
+          btnClick1() {
+            this.click = 'v-on'
+          },
+          btnClick2() {
+            this.click = '@'
+          }
         }
-      }
-    })
+      })
    
-      
-      
-			
-      
-		</script>
-		
-	</body>
+    </script>
+
+  </body>
 </html>
