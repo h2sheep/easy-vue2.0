@@ -86,9 +86,10 @@ const compileNode = {
 // -------- Compile ----------
 
 class Compile {
-	constructor(el, vm) {
-		// 1. 获取对应元素 
-		this.el = this.isElementNode(el) ? el : document.querySelector(el)
+	
+  constructor(el, vm) {
+    // 1. 获取对应元素 
+    this.el = this.isElementNode(el) ? el : document.querySelector(el)
     this.vm = vm
     
     // 2. 将元素中所有的子元素放进文档碎片中
@@ -99,7 +100,7 @@ class Compile {
     
     // 4. 插入到页面中
     this.el.appendChild(frg)
-	}
+  }
 	
 	
   
@@ -151,15 +152,16 @@ class Compile {
         
         // 处理事件 更新数据
         compileNode[dirName](node, value, this.vm, eventName)
+	      
+	// 删除指令属性
+        node.removeAttribute(name)
           
       } else if (name.startsWith('@')) {  //@click
       
         const [_, eventName] = name.split('@')  // click 
         compileNode['on'](node, value, this.vm, eventName)
+        node.removeAttribute(name)
       }
-      
-      // 删除指令属性
-      node.removeAttribute(name)
     })
   }
   
