@@ -56,12 +56,12 @@ class Dep {
     this.subs = []
   }
   
-  // 添加watcher
+  // 订阅
   addSubs(watcher) {
     this.subs.push(watcher)
   }
   
-  // 通知所有的watcher更新
+  // 发布
   notify() {
     this.subs.forEach(watcher => watcher.update())
   }
@@ -75,12 +75,17 @@ class Watcher {
     this.vm = vm
     this.callback = callback
     // 保存当前的值
-    this.oldVal = compileNode.getValue(this.expr, this.vm)
-    
-    // 将当前watcher挂载到Dep的target属性上
+    this.oldVal = this.getValue()
+  }
+  
+  getValue() {
+    // 一创建实例，将挂载到target属性上
     Dep.target = this
-    this.update()
-    // 更新后就取消原来值挂载
+    
+    // 取值，调用get方法，放进subs中
+    const val = compileNode.getValue(this.expr, this.vm)
+    
+    // 消除target引用
     Dep.target = null
   }
   
@@ -96,10 +101,12 @@ class Watcher {
   }
 }
 
-/* 细节：
-  * dep如何获取对应的watcher，将当前watcher挂载到Dep的私有属性target上
-  * 一旦属性值发生改变，左边会进行获取调用get方法，将watcher存进subs中
-  * 右边赋值时会调用set方法，通知所有watcher更新
+/* 细节：dep如何获取对应的watcher？
+  * 一旦创建一个watcher，就挂载到Dep的私有属性target上
+  * 进行取值的时候，会调用对用属性的get方法，并将watcher存进subs中
   * 之后需要将原来watcher消除，不然会一直留在subs中
   * 每次更新数据前应该是本次需要更新的数据，前面更新过的不应该存在
+  * 
+  * 更新值的时候同理，this.msg = 'yukino'
+  * 左边取值调用getter，右边赋值调用setter
  */
