@@ -105,6 +105,8 @@ class Watcher {
   * 一旦创建一个watcher，就挂载到Dep的私有属性target上
   * 进行取值的时候，会调用对用属性的get方法，并将watcher存进subs中
   * 之后需要取消target的引用
+  * 因为下次读取时，target不为null，又会添加一次
+  
   * 更新值的时候，this.msg = 'yukino'
-  * 左边取值调用getter，如果此时target不为null，又会添加一次，右边赋值调用setter
+  * dep调用notify方法，所有watcher进行update更新，将新值通过回调返回给对应的值更新方法
  */
