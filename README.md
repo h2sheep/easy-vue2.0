@@ -15,7 +15,7 @@
  * dep的订阅和发布
    * 在解析对应的指令时，就创建一个watcher，并挂载到Dep的target属性上
    * 获取属性的时候，会调用对应的getter方法，这时dep会将该watcher保存到subs中
-   * 细节处理：订阅完毕，清除target的引用，不然修改值的时候，不为null又添加了一次，就浪费资源了啊
+   * 细节处理：订阅完毕，清除target的引用，因为下次读取时，target不为null，又会添加一次，就会浪费资源
    * 当属性值改变时，会调用对应的setter方法，这时dep会notify所有watcher更新
  
   
