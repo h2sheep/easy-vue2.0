@@ -17,8 +17,8 @@ class MVVM {
       // 数据代理
       this.proxy(this.$data)
     }
-}	
-	
+  }	
+  
   proxy(data) {
     for (const key in data) {
       // 为vm定义data中属性
@@ -38,5 +38,4 @@ class MVVM {
       })
     }
   }
-}
 }
