@@ -1,6 +1,6 @@
 # mvvm
 
-* 简易mvvm源码实现
+* 简易响应式的实现
   * 数据绑定
   * 模板解析
   * 数据代理
@@ -19,4 +19,4 @@
    * 当属性值改变时，会调用对应的setter方法，这时dep会notify所有watcher更新
  
   
-* 博客：https://h2sheep.cn/
+* 博客：https://h2sheep.gitee.io/
